@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head translate="yes">
@@ -16,26 +17,14 @@
       #content {
         user-select: none;
       }
-      input, button {
-          box-sizing: border-box; /* padding + border 包含在 width 內 */
+      #content {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;  /* 垂直置中 */
+          align-items: center;      /* 水平置中 */
+          text-align: center;       /* 文字置中 */
       }
-      iframe.skiptranslate, #goog-gt-tt {
-          display: none !important;
-      }
-      html, body {
-        overflow: hidden;
-        height: 100%;
-        position: fixed;
-        width: 100%;
-      }
-      dialog::backdrop {
-          background: rgba(0, 0, 0, 0.6); /* 半透明背景 */
-          /* background-color: black; */
-      }
-      dialog {
-          background: rgba(0, 0, 0, 0.6); /* 半透明背景 */
-          background-color: white;
-      }
+      .fat { padding: 8px; }
     </style>
     <!--style>
         .skiptranslate {
@@ -54,148 +43,23 @@
         }
     </style-->
     <style>
-      #content {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;  /* 垂直置中 */
-          align-items: center;      /* 水平置中 */
-          text-align: center;       /* 文字置中 */
-      }
-      input, textarea, button, select {
-        /*font-size: inherit; /* 主動繼承 body 字體大小 */
-        font-size: 18px;
-      }
-      html, body { font-size: 14px; }
-      html, body {
-        margin: 0;
-        /*font-family: Arial, sans-serif;*/
-        background-color: #ffffff;
-        background-color: #000000;
-        background-color: #cdcdcd;
-        color: #333;
-        user-select: none;
-      }
-  
-      header {
-        text-align: center;
-        padding: 2rem 1rem;
-        border-bottom: 1px solid #ddd;
-      }
-  
-      header h1 {
-        margin: 0;
-        font-size: 2.5rem;
-      }
-  
-      .intro {
-        text-align: center;
-        padding: 1rem 2rem;
-        max-width: 700px;
-        margin: auto;
-      }
-    </style>
-    
-    <style>
-    
-      @keyframes blink {
-        0% { border-color: black; }
-        50% { border-color: transparent; }
-        100% { border-color: black; }
-      }
-      
-      #BOTTOM {
-          height: 100vh;  /* 視窗高度可改成你需要的高度 */
-          width: 100vw;
-          background-color: #000000;
-          background-color: #cdcdcd;
-          color: #333;
-      }
-      .container {
-        position: relative;  /* 父容器設定為 relative，以便子元素的 absolute 定位能相對於它 */
-        width: 100%;
-        height: 100%;
-        background: #eee;
-        color: black;
-      }
     </style>
   
-    <style>
-      @keyframes fadeGradient {
-        from {
-          background: linear-gradient(white, white);
-        }
-        to {
-          background: linear-gradient(white, transparent);
-        }
-      }
-      @keyframes fadeOut {
-        from { opacity: 1; }
-        to { opacity: 0; }
-      }
-      
-      
-      @keyframes hardBlink {
-        0%, 100% { border-color: red; }
-        50%      { border-color: transparent; }
-      }
-      .main {
-          border: 2px solid red;
-          padding: 8px;
-          /**animation: blinkBorder 1s infinite;  //===*/
-          /* 呼吸式動畫：平滑過渡 */
-          /**animation: blinkBorder 1s ease-in-out infinite;  //===*/
-          /* 閃爍式動畫：瞬間切換 */
-          animation: hardBlink 1.0s steps(1, start) infinite;
-      }
-      
-      @keyframes hardUse {
-        0%, 100% { border-color: green; }
-        50%      { border-color: transparent; }
-      }
-      .use { /* background-color: white; */ }
-      .use:hover {
-        background-color: #cdcdcd;
-        color: black;
-      }
-      .use:active {
-        background-color: #222222;
-        color: white;
-      }
-      .use:focus {
-        outline: none;              /* 移除預設藍色邊框 */
-        /* border: 2px solid green;       /* 或使用 #f44336 */
-        /* box-shadow: 0 0 5px red; */
-        /* animation: hardUse 1.0s steps(1, start) infinite; */
-      }
-    </style>
+<style></style>
+<link rel="stylesheet" href="https://copyright.nins.cc/children/0001/nins-zzz.css">
+
 </head>
 <body>
 <!-- UPDATE ================================================== -->
 <script src="https://copyright.nins.cc/children/0001/nins-update.js"></script>
+<!-- WORLD ================================================== -->
+<script src="https://copyright.nins.cc/children/0001/nins-world.js"></script>
+<!-- DIALOG ================================================== -->
+<script src="https://copyright.nins.cc/children/0001/nins-dialog.js"></script>
+<!-- TRANSLATE ================================================== -->
+<script src="https://copyright.nins.cc/children/0001/nins-translate.js"></script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     
-    <!--div id="google_translate_element" style="display:none;"></div-->
-  
-    
-    <!--button disabled="" id="disabled" style="
-      position: fixed;
-      bottom: 0;
-      top: 0; /* 距離頂部 0 */
-      left: 0; /* 距離左側 0 */
-      right: 0; /* 距離右側 0 */
-      width: 100%;
-      height: 100%;
-      border: none;
-      padding: 0;
-      margin: 0;
-      /*opacity: 0;  /*不透明度*/
-      /*background: transparent;  /*不透明度？*/
-      cursor: default;
-      z-index: 99999;  /* 確保在最高層 */
-      /*background: linear-gradient(white, transparent);*/
-      background: white;
-      animation: fadeOut 3s forwards;
-      pointer-events: none;  /* 動畫期間不阻擋互動（可選）*/
-    "></button!-->
     
     
     <div style="
@@ -224,7 +88,7 @@
           </div></div>
           
 <!-- 放置你原有的布局 -->
-<button class="main use" type="button" onclick="document.getElementById('input_qr').click();">🖼️</button>
+<button type="button" class="main use fat" onclick="document.getElementById('input_qr').click();">🖼️</button>
 <input type="file" id="input_qr" style="display: none;" accept="image/*">
 <canvas id="canvas_qr" style="display:none;"></canvas>
 
@@ -235,9 +99,9 @@ The final HTTPS destination after decoding will be displayed here.
 
 <div class="input-btn-wrapper" style="display: flex; align-items: stretch; width:100%; text-align: center;">
   <!--button type="button" class="main " translate="no" onclick="document.getElementById('input_msg').value='https://';">💡<p style="margin: 0; padding: 0; font-size: 1vh;" class="label">https://</p></button!-->
-  <button type="button" class="main use" translate="no" onclick="send()">🚀<p style="margin: 0; padding: 0; font-size: 1vh;" class="label">enter</p></button>
-  <input id="input_msg" class="main use" type="text" name="url" autocomplete="off" placeholder="After entering the URL, please press Enter!" style="flex: 1;"/>
-  <button type="button" class="main use" translate="no" onclick="send()">🚀<p style="margin: 0; padding: 0; font-size: 1vh;" class="label">enter</p></button>
+  <button type="button" class="main use fat" translate="no" onclick="send()">🚀<p style="margin: 0; padding: 0; font-size: 1vh;" class="label">enter</p></button>
+  <input id="input_msg" class="main use fat" type="text" name="url" autocomplete="off" placeholder="After entering the URL, please press Enter!" style="flex: 1;"/>
+  <button type="button" class="main use fat" translate="no" onclick="send()">🚀<p style="margin: 0; padding: 0; font-size: 1vh;" class="label">enter</p></button>
 </div>
 
 <button id="input_msgbtn" style="display:none" onclick="send()">Send and Recv</button>
@@ -487,148 +351,6 @@ document.getElementById('input_qr').addEventListener('change', function(e) {
 
 <!-- 放置你原有的布局 -->
  
-<!-- LOG ================================================== -->
-<script>
-const dialog = document.getElementById('DialogCheck');
-const logOutput = document.getElementById('logOutput');
-
-// 攔截 console.log 與 console.error
-['log', 'error'].forEach(level => {
-  const original = console[level];
-  console[level] = function(...args) {
-    original.apply(console, args);
-    const message = args.map(a => (typeof a === 'object' ? JSON.stringify(a) : a)).join(' ');
-    logOutput.insertAdjacentHTML('beforeend', `<div class="${level}">${message}</div>`);
-    // 滾動到底部
-    logOutput.scrollTop = logOutput.scrollHeight;
-  };
-});
-
-// 測試
-const version = (new Date().toLocaleString(), 'v1.20240925.1314 (This is an error test.)');
-console.error(version);
-console.warn(version);
-console.info(version);
-console.log(version);
-</script>
-<!-- LOG ================================================== -->
-    
-
-<!-- TRANSLATE ================================================== -->
-<script type="text/javascript">  // google.js
-  // GOOGLE TRANSLATE
-  // 自動翻譯***
-  ///document.cookie = "googtrans=/en/zh-TW; path=/";
-  ///location.reload();
-
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'en',  ///'en', 改為根據中間語言(ilang) 或 頁面語言(locale)  ///鼓勵輸入中間語言，翻譯必定可以顯示英文。
-      includedLanguages: '',  ///zh-TW,ja,ko,en,hi,zh-CN
-      autoDisplay: false,
-      ///layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-  }
-  
-  function waitForCombo(callback) {
-    // 等待載入翻譯語言
-    // 這是一種調用方法？ 並且使用方法的內部變數？
-    const timer = setInterval(() => {
-      const combo = document.querySelector('.goog-te-combo');
-      if (combo) {
-        clearInterval(timer);
-        callback(combo);
-      }
-    }, 300);
-  }
-
-  function waitForTranslationById(elementId, callback) {
-    // 等待頁面翻譯完成
-    const target = document.getElementById(elementId);
-    if (!target) return;
-
-    const observer = new MutationObserver((mutations, obs) => {
-      for (const mutation of mutations) {
-        // 偵測子節點或文字內容是否改變
-        if (mutation.type === "childList" || mutation.type === "characterData") {
-          obs.disconnect(); // 翻譯完成，停止觀察
-          callback();
-          break;
-        }
-      }
-    });
-
-    observer.observe(target, {
-      childList: true,   // 子節點增減
-      subtree: true,     // 包含所有子孫節點
-      characterData: true // 文字內容改變
-    });
-  }
-
-  function autoTranslate(lang) {
-    const tryTranslate = () => {
-      const combo = document.querySelector('.goog-te-combo');
-      console.log('combo?', !!combo);
-        
-      if (lang.replace(/_/g, "-").split("-")[0] === "en") {
-        ///document.getElementById("input_msg").style.display = "block";
-        ///document.getElementById("input_msgbtn").style.display = "block";
-        document.getElementById("content").style.background = "#FFFFFF";
-        ///document.getElementById('Input').textAlign = 'center';
-      }
-  
-      waitForTranslationById('notice', () => {
-        ///document.getElementById("input_msg").style.display = "block";
-        ///document.getElementById("input_msgbtn").style.display = "block";
-        document.getElementById("content").style.background = "#FFFFFF";
-        ///document.getElementById('Input').textAlign = 'center';
-      });
-
-      if (!combo) { setTimeout(tryTranslate, 300); }
-      if (combo) {
-        document.querySelector('.goog-te-combo').addEventListener('change', () => {
-          console.log("語言已切換!");
-          console.log("新語言代碼:", combo.value);
-          ///console.log("新語言文字:", combo.options[combo.selectedIndex].text);
-        });
-
-        const options = Array.from(combo.options).map(opt => opt.value);console.log('可用語言代碼:', options);
-        console.log("autoTranslate?:", lang);
-        ///combo.value = lang;
-        combo.value = options.includes(lang) 
-          ?  lang 
-          :  options.find(opt => opt.startsWith(lang))  
-          || options.find(opt => opt.startsWith(lang.slice(0, 2))) 
-          || null;
-        combo.dispatchEvent(new Event('change'));
-        console.log("autoTranslate!:", combo.value);
-      } else {
-        setTimeout(tryTranslate, 300); // 遞迴檢查
-      }
-    };
-    tryTranslate();
-  }
-
-  window.addEventListener('load', () => {
-    console.log("window...load");
-      
-    waitForCombo((combo) => {
-      console.log("autoTranslate...waitForCombo");
-      autoTranslate( (navigator.language || navigator.userLanguage || "en-US") );
-      ///console.log("combo 已生成:", combo);
-      ///combo.value = 'en';
-      ///combo.dispatchEvent(new Event('change'));
-    });
-    /*
-    setTimeout(() => {
-      console.log("autoTranslate...setTimeout");
-      ///const slang = navigator.language || navigator.userLanguage || "en-US";
-      autoTranslate( (navigator.language || navigator.userLanguage || "en-US") );          
-      ///document.getElementById(":1.container").style.display = "";
-    }, 1000); */
-  });
-</script>
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     
 </body>
 </html>
