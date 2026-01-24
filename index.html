@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head translate="yes">
@@ -88,7 +89,7 @@
           </div></div>
           
 <!-- 放置你原有的布局 -->
-<button type="button" class="main use fat" onclick="document.getElementById('input_qr').click();">🖼️</button>
+<button type="button" class="main use fat" onclick="document.getElementById('input_qr').click();">🖼️<p translate="no" style="margin: 0; padding: 0; font-size: 1vh;" class="label">image</p></button>
 <input type="file" id="input_qr" style="display: none;" accept="image/*">
 <canvas id="canvas_qr" style="display:none;"></canvas>
 
@@ -99,9 +100,9 @@ The final HTTPS destination after decoding will be displayed here.
 
 <div class="input-btn-wrapper" style="display: flex; align-items: stretch; width:100%; text-align: center;">
   <!--button type="button" class="main " translate="no" onclick="document.getElementById('input_msg').value='https://';">💡<p style="margin: 0; padding: 0; font-size: 1vh;" class="label">https://</p></button!-->
-  <button type="button" class="main use fat" translate="no" onclick="send()">🚀<p style="margin: 0; padding: 0; font-size: 1vh;" class="label">enter</p></button>
+  <button type="button" class="main use fat" translate="no" onclick="send()">🚀<p translate="no" style="margin: 0; padding: 0; font-size: 1vh;" class="label">enter</p></button>
   <input id="input_msg" class="main use fat" type="text" name="url" autocomplete="off" placeholder="After entering the URL, please press Enter!" style="flex: 1;"/>
-  <button type="button" class="main use fat" translate="no" onclick="send()">🚀<p style="margin: 0; padding: 0; font-size: 1vh;" class="label">enter</p></button>
+  <button type="button" class="main use fat" translate="no" onclick="send()">🚀<p translate="no" style="margin: 0; padding: 0; font-size: 1vh;" class="label">enter</p></button>
 </div>
 
 <button id="input_msgbtn" style="display:none" onclick="send()">Send and Recv</button>
@@ -197,6 +198,7 @@ async function send() {
     document.getElementById("content").innerHTML = "Waiting for decoding...";
 
     const url = document.getElementById("input_msg").value;
+    console.log("RAW:", JSON.stringify(url));
     if (!url.startsWith("http")) { document.getElementById("content").innerHTML = "Invalid URL format!!!";return; }
 
     document.getElementById("input_qr").disabled = true;
