@@ -213,17 +213,21 @@ async function send() {
     
     ///const url...
     const msg = await deurl({ "url": url });
+
     const prompt_v1 = `lang*==="${lang}".;unsafe*==="${url}"?;unsafe*==="${msg}"?;`;
     const prompt_v2 = `"${lang}"===mylang."${url}"===unsafe?"${msg}"===unsafe?`;
     const prompt_v3 = `lang="${lang}".\n${url}==="unsafe"?\n${msg}==="unsafe"?\n`;
     const prompt_v4 = `lang=${lang}.\n${url}==="unsafe(%)"?\n${msg}==="unsafe(%)"?\n`;
+
     const prompt = `lang=${lang}.\n${task}.\n${need}.\n${url}.\n${msg}.\n`;
     const openai = "https://chatgpt.com/?prompt=" + encodeURIComponent( prompt );
     const google = "https://www.google.com/search?udm=50&aep=1&aic=0&q=" + encodeURIComponent( prompt );
 
+    const translate = `https://translate.google.com/translate?sl=auto&tl=zh-TW&u=${encodeURIComponent( msg )}`
     ///🤖🧠🎯
     document.getElementById("content").innerHTML = `
-    <p translate="no" style="color: blue;">${msg}</p>
+    <!--p translate="no" style="color: blue;">${msg}</p!-->
+    <a translate="no" target="_blank" rel="noopener noreferrer" href="${translate}">[${msg}]</a>
     <p translate="yes">Decoding complete! You can click "AI" to analyze the URL!🤖🤖🤖</p>
     <p translate="no">***
       <a translate="no" target="_blank" rel="noopener noreferrer" href="${openai}">ChatGPT</a>
@@ -257,6 +261,7 @@ document.getElementById("input_msg").addEventListener("focus", (event) => {
     if (event.target.value) { return; }
     document.getElementById("input_msg").value = "https://nins.cc/";  ///***
     document.getElementById("input_msg").value = "https://google.com/";  ///***
+    document.getElementById("input_msg").value = "https://instagram.com/";  ///***
 });
 
 ///document.getElementById("input_msg").addEventListener("blur", () => {  });
@@ -285,9 +290,9 @@ document.getElementById("input_msg").addEventListener("keydown", function(e) {
 // 提示文字清單
 const placeholders = [
     ///"google.com",
-    "https://google.com/",
+    "https://google.com/",  ///***
+    "https://nins.cc/",  ///***
     ///"deurl.nins.cc",
-    "https://nins.cc/",
     ///"Enter the URL to decode its destination...",
 ];
 
