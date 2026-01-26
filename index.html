@@ -322,6 +322,7 @@ document.getElementById('input_qr').addEventListener('change', function(e) {
         const img = new Image();
         img.onload = function() {
             // 1. 設定畫布大小與圖片一致
+            document.getElementById('content').innerHTML = "The image has been received, please wait...";
             canvas.width = img.width;
             canvas.height = img.height;
             
@@ -360,6 +361,7 @@ document.getElementById('input_qr').addEventListener('change', function(e) {
     
 </body>
 </html>
+
 
 
 
