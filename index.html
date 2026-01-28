@@ -216,7 +216,8 @@ async function send() {
     const prompt_v3 = `lang="${lang}".\n${url}==="unsafe"?\n${msg}==="unsafe"?\n`;
     const prompt_v4 = `lang=${lang}.\n${url}==="unsafe(%)"?\n${msg}==="unsafe(%)"?\n`;
 
-    const prompt = `lang=${lang}.\n${task}.\n${need}.\n${url}.\n${msg}.\n`;
+    const bynins = `This is the result of a URL redirect. The technology prompt is provided by "nins.cc"!`;
+    const prompt = `lang=${lang}.\n${task}.\n${need}.\n---\n${url}.\n${msg}.\n${bynins}`;
     const openai = "https://chatgpt.com/?prompt=" + encodeURIComponent( prompt );
     const google = "https://www.google.com/search?udm=50&aep=1&aic=0&q=" + encodeURIComponent( prompt );
 
@@ -258,8 +259,8 @@ document.getElementById("input_msg").addEventListener("focus", (event) => {
     if (event.target.value) { return; }
     document.getElementById("input_msg").value = "https://nins.cc/";  ///***
     document.getElementById("input_msg").value = "https://google.com/";  ///***
-    document.getElementById("input_msg").value = "https://instagram.com/";  ///***
-    document.getElementById("input_msg").value = "http://google.forms.nins.cc/";  ///***
+    ///document.getElementById("input_msg").value = "https://instagram.com/";  ///***
+    ///document.getElementById("input_msg").value = "http://google.forms.nins.cc/";  ///***
 });
 
 ///document.getElementById("input_msg").addEventListener("blur", () => {  });
@@ -361,6 +362,7 @@ document.getElementById('input_qr').addEventListener('change', function(e) {
     
 </body>
 </html>
+
 
 
 
