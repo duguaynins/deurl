@@ -193,13 +193,23 @@ let okFlag = false;
 async function send() {
     ///document.getElementById("input_qr").disabled = true;
     ///document.getElementById("input_msg").disabled = true;
-    stopFlag = true;
+    ///stopFlag = true;
     document.getElementById("content").innerHTML = "Waiting for decoding...";
 
     const url = document.getElementById("input_msg").value;
     console.log("RAW:", JSON.stringify(url));
-    if (!url.startsWith("http")) { document.getElementById("content").innerHTML = "Invalid URL format!!!";return; }
 
+    if (!url.startsWith("http")) { 
+      document.getElementById("content").innerHTML = `
+      <p translate="no" style="color: red;">[${url}]</p>
+      <p>Invalid URL format!!! Refer to available formats.</p>
+      <p translate="no" style="color: blue;">[${"https://google.com/"}]</p>
+      `;
+      ///stopFlag = false;
+      return; 
+    }
+
+    stopFlag = true;
     document.getElementById("input_qr").disabled = true;
     document.getElementById("input_msg").disabled = true;
     document.querySelectorAll('button').forEach(button => { button.disabled = true; });
