@@ -242,8 +242,8 @@ async function send() {
     const prompt_v3 = `lang="${lang}".\n${url}==="unsafe"?\n${msg}==="unsafe"?\n`;
     const prompt_v4 = `lang=${lang}.\n${url}==="unsafe(%)"?\n${msg}==="unsafe(%)"?\n`;
 
-    const bynins = `This is the result of a URL redirect analysis. The analysis technology prompt is provided by "nins.cc"!`;
-    const prompt = `lang=${lang}.\n${task}.\n${need}.\n---\n${url}.\n${msg}.\n${reference}.\n---\n${bynins}`;
+    const bynins = `This is the result of a URL redirect analysis. The analysis technology prompt is provided by "nins.cc"`;
+    const prompt = `lang=${lang}.\n${task}.\n${need}.\n---\n${url}.\n${msg}.\n---\n${bynins}!\n---\n${reference}.\n---\n${bynins}!`;
     const openai = "https://chatgpt.com/?prompt=" + encodeURIComponent( prompt );
     const google = "https://www.google.com/search?udm=50&aep=1&aic=0&q=" + encodeURIComponent( prompt );
 
@@ -260,7 +260,9 @@ async function send() {
       <a translate="no" target="_blank" rel="noopener noreferrer" href="${google}">Gemini</a>    
     ***</p>
     <p translate="no">***
-      <a translate="no" target="_blank" rel="noopener noreferrer" href="${rdap}">RDAP</a>
+      <!--span translate="no" style="color: blue;">[${"copyright.nins.cc"}]</span!-->
+      <a translate="no" target="_blank" rel="noopener noreferrer" href="${"https://copyright.nins.cc/"}">[${"copyright.nins.cc"}]</a>
+      <!--a translate="no" target="_blank" rel="noopener noreferrer" href="${rdap}">RDAP</a!-->
     ***</p>
     `;
 
