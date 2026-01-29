@@ -228,7 +228,7 @@ async function send() {
     const prompt_v3 = `lang="${lang}".\n${url}==="unsafe"?\n${msg}==="unsafe"?\n`;
     const prompt_v4 = `lang=${lang}.\n${url}==="unsafe(%)"?\n${msg}==="unsafe(%)"?\n`;
 
-    const bynins = `This is the result of a URL redirect. The technology prompt is provided by "nins.cc"!`;
+    const bynins = `This is the result of a URL redirect analysis. The analysis technology prompt is provided by "nins.cc"!`;
     const prompt = `lang=${lang}.\n${task}.\n${need}.\n---\n${url}.\n${msg}.\n${bynins}`;
     const openai = "https://chatgpt.com/?prompt=" + encodeURIComponent( prompt );
     const google = "https://www.google.com/search?udm=50&aep=1&aic=0&q=" + encodeURIComponent( prompt );
