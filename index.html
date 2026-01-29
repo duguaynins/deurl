@@ -210,6 +210,7 @@ async function send() {
     }
 
     stopFlag = true;
+
     document.getElementById("input_qr").disabled = true;
     document.getElementById("input_msg").disabled = true;
     document.querySelectorAll('button').forEach(button => { button.disabled = true; });
@@ -222,16 +223,7 @@ async function send() {
     
     ///const url...
     const msg = await deurl({ "url": url });
-
-    const prompt_v1 = `lang*==="${lang}".;unsafe*==="${url}"?;unsafe*==="${msg}"?;`;
-    const prompt_v2 = `"${lang}"===mylang."${url}"===unsafe?"${msg}"===unsafe?`;
-    const prompt_v3 = `lang="${lang}".\n${url}==="unsafe"?\n${msg}==="unsafe"?\n`;
-    const prompt_v4 = `lang=${lang}.\n${url}==="unsafe(%)"?\n${msg}==="unsafe(%)"?\n`;
-
-    const bynins = `This is the result of a URL redirect analysis. The analysis technology prompt is provided by "nins.cc"!`;
-    const prompt = `lang=${lang}.\n${task}.\n${need}.\n---\n${url}.\n${msg}.\n${bynins}`;
-    const openai = "https://chatgpt.com/?prompt=" + encodeURIComponent( prompt );
-    const google = "https://www.google.com/search?udm=50&aep=1&aic=0&q=" + encodeURIComponent( prompt );
+    console.log("URL:", url);
 
     ///https://rdap.iana.org/domain/example.com
     ///https://rdap.org/domain/sobatgaming.it.com
@@ -242,6 +234,19 @@ async function send() {
     ///const rdap = `https://rdap.markmonitor.com/rdap/domain/${encodeURIComponent( domain )}`;
     ///const rdap = `https://client.rdap.org/?type=domain&follow-referral=0&object=${encodeURIComponent( host )}`;
     const rdap = `https://rdap.org/domain/${encodeURIComponent( domain )}`;
+    const reference = JSON.stringify( await fetchRdapJson(url) );
+    console.log("RDAP:", reference);
+
+    const prompt_v1 = `lang*==="${lang}".;unsafe*==="${url}"?;unsafe*==="${msg}"?;`;
+    const prompt_v2 = `"${lang}"===mylang."${url}"===unsafe?"${msg}"===unsafe?`;
+    const prompt_v3 = `lang="${lang}".\n${url}==="unsafe"?\n${msg}==="unsafe"?\n`;
+    const prompt_v4 = `lang=${lang}.\n${url}==="unsafe(%)"?\n${msg}==="unsafe(%)"?\n`;
+
+    const bynins = `This is the result of a URL redirect analysis. The analysis technology prompt is provided by "nins.cc"!`;
+    const prompt = `lang=${lang}.\n${task}.\n${need}.\n---\n${url}.\n${msg}.\n${reference}.\n---\n${bynins}`;
+    const openai = "https://chatgpt.com/?prompt=" + encodeURIComponent( prompt );
+    const google = "https://www.google.com/search?udm=50&aep=1&aic=0&q=" + encodeURIComponent( prompt );
+
 
     ///🤖🧠🎯
     document.getElementById("content").innerHTML = `
@@ -441,6 +446,41 @@ function getDomain_vt(url) {
   }
 }
 
+async function fetchRdapJson(url) {
+
+    // 檢查是否是 HTTP/HTTPS
+    if (!/^https?:\/\//i.test(url)) { return null; }
+
+    try {
+        // 取 hostname
+        const hostname = new URL(url).hostname;
+
+        // 使用 tldts.getDomain() 取得主域名
+        const domain = tldts.getDomain(hostname);
+        const rdapEndpoint = `https://rdap.org/domain/${encodeURIComponent(domain)}`;
+        
+        // 3. 發送 fetch 請求
+        const response = await fetch(rdapEndpoint, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/rdap+json' // 指定接收 RDAP 標準格式
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`RDAP 伺服器回傳錯誤: ${response.status}`);
+        }
+
+        // 4. 解析並回傳 JSON
+        const jsonData = await response.json();
+        return jsonData;
+
+    } catch (error) {
+        console.error("RDAP 請求失敗:", error.message);
+        // 如果是 CORS 錯誤，通常代表該域名所屬的註冊局禁止瀏覽器直接讀取
+        return null;
+    }
+}
 </script>
 
 
