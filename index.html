@@ -234,9 +234,15 @@ async function send() {
     const google = "https://www.google.com/search?udm=50&aep=1&aic=0&q=" + encodeURIComponent( prompt );
 
     ///https://rdap.iana.org/domain/example.com
+    ///https://rdap.org/domain/sobatgaming.it.com
     const domain = getDomain(msg);
+    const host = getHostname(msg);
     const translate = `https://translate.google.com/translate?sl=auto&tl=zh-TW&u=${encodeURIComponent( msg )}`
-    const iana = `https://rdap.iana.org/domain/${encodeURIComponent( domain )}`;
+    ///const rdap = `https://rdap.iana.org/domain/${encodeURIComponent( domain )}`;
+    ///const rdap = `https://rdap.markmonitor.com/rdap/domain/${encodeURIComponent( domain )}`;
+    ///const rdap = `https://client.rdap.org/?type=domain&follow-referral=0&object=${encodeURIComponent( host )}`;
+    const rdap = `https://rdap.org/domain/${encodeURIComponent( domain )}`;
+
     ///🤖🧠🎯
     document.getElementById("content").innerHTML = `
     <p translate="no" style="color: red;">[${url}]</p>
@@ -249,7 +255,7 @@ async function send() {
       <a translate="no" target="_blank" rel="noopener noreferrer" href="${google}">Gemini</a>    
     ***</p>
     <p translate="no">***
-      <a translate="no" target="_blank" rel="noopener noreferrer" href="${iana}">Iana</a>
+      <a translate="no" target="_blank" rel="noopener noreferrer" href="${rdap}">RDAP</a>
     ***</p>
     `;
 
@@ -273,6 +279,7 @@ async function send() {
 ///document.getElementById("input_msg").addEventListener("focus", function () {
 document.getElementById("input_msg").addEventListener("focus", (event) => {
     ///if (event.target.value) { return; }
+
     if (stopFlag || okFlag) { return; }
     document.getElementById("content").innerHTML = "Please enter the URL and send it.🚀🚀🚀"; console.log("已具焦");
     if (event.target.value) { return; }
@@ -286,6 +293,7 @@ document.getElementById("input_msg").addEventListener("focus", (event) => {
 ///document.getElementById("input_msg").addEventListener("blur", function () {
 document.getElementById("input_msg").addEventListener("blur", (event) => {
     ///if (event.target.value && event.target.value !== "https://nins.cc/") { return; }
+    
     if (stopFlag || okFlag) { return; }
     document.getElementById("content").innerHTML = "or select a QR image.🖼️🖼️🖼️"; console.log("已失焦");
     ///document.getElementById("input_msg").value = "";  ///***
@@ -376,15 +384,63 @@ document.getElementById('input_qr').addEventListener('change', function(e) {
 });
 </script>
 
-<!-- QR ================================================== -->
+<!-- URL ================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/tldts@7.0.19/dist/index.umd.min.js"></script>
 <script>
+
+function getHostname(url) {
+  if (!/^https?:\/\//i.test(url)) { return null; }
+  let hostname = new URL(url).hostname;
+  return hostname;
+}
+
 function getDomain(url) {
+  if (!/^https?:\/\//i.test(url)) { return null; }
+  const domain = tldts.getDomain(url);
+  return domain;
+}
+
+function getDomain_v1(url) {
   
   url = url.replace(/^https?:\/\//, '');  // 先去掉 http:// 或 https://
   url = url.split('/')[0];  // 去掉可能的路徑或參數
 
-  return url;
+  let domain = null;
+  domain = url;
+  
+  ///let parts = domain.split('.');
+  ///if (parts.length >= 2) { return parts.slice(-2).join('.'); }
+
+  return domain;
 }
+
+function getDomain_vt(url) {
+  try {
+    if (!/^https?:\/\//i.test(url)) { return null; }
+
+    // 解析 URL，取 hostname
+    let hostname = new URL(url).hostname; // x.a.b.com -> 'x.a.b.com'
+    let parts = hostname.split('.');
+
+    if (parts.length < 2) {
+      ///return hostname; // 非正常域名
+      return null;
+    }
+
+    let secondLast = parts[parts.length - 2]; // 倒數第二段
+
+    if (secondLast.length < 3 && parts.length >= 3) {
+      // 倒數第二段小於 3 字元，取三段
+      return parts.slice(-3).join('.');
+    } else {
+      // 倒數第二段 ≥ 3 字元，取兩段
+      return parts.slice(-2).join('.');
+    }
+  } catch (e) {
+    return null; // 非 URL 格式
+  }
+}
+
 </script>
 
 
