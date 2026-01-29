@@ -222,16 +222,22 @@ async function send() {
     const google = "https://www.google.com/search?udm=50&aep=1&aic=0&q=" + encodeURIComponent( prompt );
 
     ///https://rdap.iana.org/domain/example.com
+    const domain = getDomain(msg);
     const translate = `https://translate.google.com/translate?sl=auto&tl=zh-TW&u=${encodeURIComponent( msg )}`
+    const iana = `https://rdap.iana.org/domain/${encodeURIComponent( domain )}`;
     ///🤖🧠🎯
     document.getElementById("content").innerHTML = `
-    <!--p translate="no" style="color: blue;">${msg}</p!-->
-    <a translate="no" target="_blank" rel="noopener noreferrer" href="${translate}">[${msg}]</a>
+    <p translate="no" style="color: red;">[${url}]</p>
+    <p translate="no" style="color: red;">[${msg}]</p>
+    <!--a translate="no" target="_blank" rel="noopener noreferrer" href="${translate}">[${msg}]</a!-->
     <p translate="yes">Decoding complete! You can click "AI" to analyze the URL!🤖🤖🤖</p>
     <p translate="no">***
       <a translate="no" target="_blank" rel="noopener noreferrer" href="${openai}">ChatGPT</a>
        & 
       <a translate="no" target="_blank" rel="noopener noreferrer" href="${google}">Gemini</a>    
+    ***</p>
+    <p translate="no">***
+      <a translate="no" target="_blank" rel="noopener noreferrer" href="${iana}">Iana</a>
     ***</p>
     `;
 
@@ -358,12 +364,23 @@ document.getElementById('input_qr').addEventListener('change', function(e) {
 });
 </script>
 
+<!-- QR ================================================== -->
+<script>
+function getDomain(url) {
+  
+  url = url.replace(/^https?:\/\//, '');  // 先去掉 http:// 或 https://
+  url = url.split('/')[0];  // 去掉可能的路徑或參數
+
+  return url;
+}
+</script>
+
+
 <!-- 放置你原有的布局 -->
  
     
 </body>
 </html>
-
 
 
 
