@@ -244,8 +244,8 @@ async function send() {
 
     const bynins = `This is the result of a URL redirect analysis. The analysis technology prompt is provided by "nins.cc"`;
     const prompt = `${bynins}!\n---\nlang=${lang}.\n${task}.\n${need}.\n---\n${url}.\n${msg}.\n---\n${bynins}!\n---\n${reference}.\n---\n${bynins}!`;
-    const openai = "https://chatgpt.com/?prompt=" + encodeURIComponent( prompt );
-    const google = "https://www.google.com/search?udm=50&aep=1&aic=0&q=" + encodeURIComponent( prompt );
+    const openai = `https://chatgpt.com/?prompt=` + encodeURIComponent( prompt );
+    const google = `https://www.google.com/search?udm=50&aep=1&aic=0&hl=${lang}&q=` + encodeURIComponent( prompt );
 
 
     ///🤖🧠🎯
@@ -496,6 +496,7 @@ async function fetchRdapJson(url) {
     
 </body>
 </html>
+
 
 
 
