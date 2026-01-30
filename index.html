@@ -217,9 +217,9 @@ async function send() {
 
     const lang = (navigator.language || navigator.userLanguage || "en-US");
     const task_v1 = "URL information security analysis";
-    const task = "Carefully infomatoion Security Analysis for URLs";
+    const task = `Carefully infomatoion Security Analysis for URLs`;
     const need_v1 = "Shows a high level of prudence (%) in useing";
-    const need = "Shows the recommended degree of caution (%) when operating under zero-trust";
+    const need = `Shows the recommended degree of caution "(%)" when operating under zero-trust`;
     
     ///const url...
     const msg = await deurl({ "url": url });
@@ -260,7 +260,9 @@ async function send() {
       <a translate="no" target="_blank" rel="noopener noreferrer" href="${google}">Gemini</a>    
     ***</p!-->
     <p translate="no">👉
-      <a translate="no" target="_blank" rel="noopener noreferrer" href="${openai}">ChatGPT</a>    
+      <a translate="no" target="_blank" rel="noopener noreferrer" href="${openai}">ChatGPT</a>
+       & 
+      <a translate="no" target="_blank" rel="noopener noreferrer" href="${google}">Gemini</a>
     👈</p>
     <p translate="no">***
       <span translate="no" style="color: green;">[${"nins.cc"}]</span>
@@ -494,6 +496,7 @@ async function fetchRdapJson(url) {
     
 </body>
 </html>
+
 
 
 
