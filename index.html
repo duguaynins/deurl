@@ -241,7 +241,9 @@ async function send() {
     ///const rdap = `https://rdap.markmonitor.com/rdap/domain/${encodeURIComponent( domain )}`;
     ///const rdap = `https://client.rdap.org/?type=domain&follow-referral=0&object=${encodeURIComponent( host )}`;
     const rdap = `https://rdap.org/domain/${encodeURIComponent( domain )}`;
-    const reference = JSON.stringify( await fetchRdapJson(url) );
+    console.log("RDAP:", rdap);
+    ///const reference = JSON.stringify( await fetchRdapJson(url) );
+    const reference = "null";
     console.log("RDAP:", reference);
 
     const prompt_v1 = `lang*==="${lang}".;unsafe*==="${url}"?;unsafe*==="${msg}"?;`;
@@ -501,6 +503,7 @@ async function fetchRdapJson(url) {
     
 </body>
 </html>
+
 
 
 
