@@ -243,7 +243,8 @@ async function send() {
     const rdap = `https://rdap.org/domain/${encodeURIComponent( domain )}`;
     console.log("RDAP:", rdap);
     ///const reference = JSON.stringify( await fetchRdapJson(url) );
-    const reference = "null";
+    ///const reference = "null";
+    const reference = await deurl({ "url": rdap });  ///20260202
     console.log("RDAP:", reference);
 
     const prompt_v1 = `lang*==="${lang}".;unsafe*==="${url}"?;unsafe*==="${msg}"?;`;
@@ -252,7 +253,8 @@ async function send() {
     const prompt_v4 = `lang=${lang}.\n${url}==="unsafe(%)"?\n${msg}==="unsafe(%)"?\n`;
 
     const bynins = `This is the result of a URL redirect analysis. The analysis technology prompt is provided by "nins.cc"`;
-    const prompt = `${bynins}!\n---\nlang=${lang}.\n${task}.\n${need}.\n---\n${url}.\n${msg}.\n---\n${bynins}!\n---\n${reference}.\n---\n${bynins}!`;
+    ///const prompt = `${bynins}!\n---\nlang=${lang}.\n${task}.\n${need}.\n---\n${url}.\n${msg}.\n---\n${bynins}!\n---\n${reference}.\n---\n${bynins}!`;
+    const prompt = `notice=${bynins}!\n---\nlang=${lang}.\ntask=${task}.\nneed=${need}.\n---\ninput=${url}.\noutput=${msg}.\n---\nnotice=${bynins}!\n---\nrdap=${reference}.\n---\nnotice=${bynins}!`;
     const openai = `https://chatgpt.com/?prompt=` + encodeURIComponent( prompt );
     const google = `https://www.google.com/search?udm=50&aep=1&aic=0&hl=${lang}&q=` + encodeURIComponent( prompt );
 
@@ -503,6 +505,7 @@ async function fetchRdapJson(url) {
     
 </body>
 </html>
+
 
 
 
