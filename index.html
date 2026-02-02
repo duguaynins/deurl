@@ -2,6 +2,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head translate="yes">
@@ -96,12 +97,25 @@
 <p style="color: green;">Please enter the URL and send it.🚀🚀🚀</p>
 </div>
 
-
+<div id="url-slider" style="
+    display: flex;
+    flex-direction: row;         /* 水平排列 */
+    justify-content: flex-start; /* 左對齊 */
+    align-items: center;         /* 垂直置中 */
+    overflow-x: auto;            /* 可水平滾動 */
+    overflow-y: hidden;          /* 不需要垂直滾動 */
+    gap: 10px;                   /* 按鈕間距 */
+    padding: 10px;
+    white-space: nowrap;         /* 防止換行 */
+    background: #eee;
+    color: black;
+" translate="no">
+</div>
 <div class="input-btn-wrapper" style="display: flex; align-items: stretch; width:100%; text-align: center;">
   <!--button type="button" class="main " translate="no" onclick="document.getElementById('input_msg').value='https://';">💡<p style="margin: 0; padding: 0; font-size: 1vh;" class="label">https://</p></button!-->
   <button type="button" class="main use fat" translate="no" onclick="send()">🚀<p translate="no" style="margin: 0; padding: 0; font-size: 1vh;" class="label">enter</p></button>
   <input id="input_msg" class="main use fat" type="text" name="url" autocomplete="off" placeholder="After entering the URL, please press Enter!" style="flex: 1;" list="list_msg"/>
-  <datalist id="list_msg">
+  <datalist id="list_msg_vt">
       <option value="https://google.com/">
       <option value="https://www.fclnews.com/">
       <!--option value="https://cc.conins.org"!-->
@@ -140,6 +154,41 @@
 <!-- HTML ================================================== -->
     
 <!-- 放置你原有的布局 -->
+<script>
+const urls = [
+  "https://.../",
+  "https://google.com/",
+  "https://www.fclnews.com/",
+  "https://bump.oen.tw/",
+  "https://dumbmoney.tw/",
+  "https://bit.ly/4dYnhfP",
+  "https://ctbc.tw/0DIoEU",
+  "https://ctbc.tw/bsYlnz",
+  "https://ctbc.tw/rukJKu"
+];
+
+const container = document.getElementById('url-slider');
+
+urls.forEach(url => {
+  const btn = document.createElement('button');
+  btn.textContent = url;
+  btn.style.flex = "0 0 auto";
+  btn.style.padding = "8px 12px";
+  btn.style.border = "1px solid #000"; // 邊框線
+  btn.style.borderRadius = "4px";
+  ///btn.style.background = "#fff";       // 背景色
+  btn.style.cursor = "pointer";
+  btn.style.whiteSpace = "nowrap";
+  btn.className = "use";  // 加上 class
+  
+  ///btn.onclick = () => window.open(url, "_blank"); // 點擊打開新分頁
+  btn.onclick = () => {
+    document.getElementById('input_msg').value = url;  // 如果要換行可以用 "\n"
+  };
+  container.appendChild(btn);
+});
+</script>
+
 
 <script>
 /*
@@ -509,41 +558,4 @@ async function fetchRdapJson(url) {
     
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
