@@ -254,6 +254,7 @@ async function send() {
     ///document.getElementById("input_qr").disabled = true;
     ///document.getElementById("input_msg").disabled = true;
     ///stopFlag = true;
+    document.getElementById("input_msg").value =  document.getElementById("input_msg").value.trim();
     document.getElementById("content").innerHTML = "Waiting for decoding...";
 
     const url = document.getElementById("input_msg").value;
@@ -558,6 +559,7 @@ async function fetchRdapJson(url) {
     
 </body>
 </html>
+
 
 
 
