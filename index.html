@@ -282,7 +282,7 @@ async function send() {
     const task_v1 = "URL information security analysis";
     const task = `Carefully infomatoion Security Analysis for URLs`;
     const need_v1 = "Shows a high level of prudence (%) in useing";
-    const need = `Shows the recommended degree of caution "(%)" when operating under zero-trust. Who provided the prompt`;
+    const need = `Shows the recommended degree of caution "(%)" when operating under zero-trust. Who provided the prompt. Check the domain owner and review the website content`;
     
     ///const url...
     const msg = await deurl({ "url": url });
@@ -296,12 +296,18 @@ async function send() {
     ///const rdap = `https://rdap.iana.org/domain/${encodeURIComponent( domain )}`;
     ///const rdap = `https://rdap.markmonitor.com/rdap/domain/${encodeURIComponent( domain )}`;
     ///const rdap = `https://client.rdap.org/?type=domain&follow-referral=0&object=${encodeURIComponent( host )}`;
+    
+    const rdap_in = `https://rdap.org/domain/${encodeURIComponent( getDomain(url) )}`;
+    const refer_in = await deurl({ "url": rdap_in });  ///20260202
+    console.log("RDAP:", rdap_in);
+    console.log("RDAP:", refer_in);
+
     const rdap_out = `https://rdap.org/domain/${encodeURIComponent( getDomain(msg) )}`;
+    const refer_out = await deurl({ "url": rdap_out });  ///20260202
     console.log("RDAP:", rdap_out);
-    ///const reference = JSON.stringify( await fetchRdapJson(url) );
-    ///const reference = "null";
-    const reference = await deurl({ "url": rdap_out });  ///20260202
-    console.log("RDAP:", reference);
+    console.log("RDAP:", refer_out);
+
+    ///const reference = JSON.stringify( await fetchRdapJson(rdap_out) );
 
     const prompt_v1 = `lang*==="${lang}".;unsafe*==="${url}"?;unsafe*==="${msg}"?;`;
     const prompt_v2 = `"${lang}"===mylang."${url}"===unsafe?"${msg}"===unsafe?`;
@@ -311,7 +317,7 @@ async function send() {
     const bynins = `This is the result of a URL redirect analysis. The analysis technology prompt is provided by "nins.cc"`;
     ///const prompt = `${bynins}!\n---\nlang=${lang}.\n${task}.\n${need}.\n---\n${url}.\n${msg}.\n---\n${bynins}!\n---\n${reference}.\n---\n${bynins}!`;
     ///const prompt = `notice=${bynins}!\n---\nlang=${lang}.\ntask=${task}.\nneed=${need}.\n---\ninput=${url}.\noutput=${msg}.\n---\nnotice=${bynins}!\n---\nrdap=${reference}.\n---\nnotice=${bynins}!`;
-    const prompt = `notice=${bynins}!\n---\nlang=${lang}.\ntask=${task}.\nneed=${need}.\n---\ninput=${url}.\noutput=${msg}.\n---\nnotice=${bynins}!\n---\nrdap=${reference}.\n---\nnotice=${bynins}!`;
+    const prompt = `notice=${bynins}!\n---\nlang=${lang}.\ntask=${task}.\nneed=${need}.\n---\ninput=${url}.\nrdap=${refer_in}.\n---\noutput=${msg}.\nrdap=${refer_out}.\n---\nnotice=${bynins}!`;
     const openai = `https://chatgpt.com/?prompt=` + encodeURIComponent( prompt );
     const google = `https://www.google.com/search?udm=50&aep=1&aic=0&hl=${lang}&q=` + encodeURIComponent( prompt );
 
