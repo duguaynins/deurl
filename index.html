@@ -3,6 +3,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head translate="yes">
@@ -295,7 +296,7 @@ async function send() {
     ///const rdap = `https://rdap.iana.org/domain/${encodeURIComponent( domain )}`;
     ///const rdap = `https://rdap.markmonitor.com/rdap/domain/${encodeURIComponent( domain )}`;
     ///const rdap = `https://client.rdap.org/?type=domain&follow-referral=0&object=${encodeURIComponent( host )}`;
-    const rdap_out = `https://rdap.org/domain/${encodeURIComponent( domain )}`;
+    const rdap_out = `https://rdap.org/domain/${encodeURIComponent( getDomain(msg) )}`;
     console.log("RDAP:", rdap_out);
     ///const reference = JSON.stringify( await fetchRdapJson(url) );
     ///const reference = "null";
@@ -309,6 +310,7 @@ async function send() {
 
     const bynins = `This is the result of a URL redirect analysis. The analysis technology prompt is provided by "nins.cc"`;
     ///const prompt = `${bynins}!\n---\nlang=${lang}.\n${task}.\n${need}.\n---\n${url}.\n${msg}.\n---\n${bynins}!\n---\n${reference}.\n---\n${bynins}!`;
+    ///const prompt = `notice=${bynins}!\n---\nlang=${lang}.\ntask=${task}.\nneed=${need}.\n---\ninput=${url}.\noutput=${msg}.\n---\nnotice=${bynins}!\n---\nrdap=${reference}.\n---\nnotice=${bynins}!`;
     const prompt = `notice=${bynins}!\n---\nlang=${lang}.\ntask=${task}.\nneed=${need}.\n---\ninput=${url}.\noutput=${msg}.\n---\nnotice=${bynins}!\n---\nrdap=${reference}.\n---\nnotice=${bynins}!`;
     const openai = `https://chatgpt.com/?prompt=` + encodeURIComponent( prompt );
     const google = `https://www.google.com/search?udm=50&aep=1&aic=0&hl=${lang}&q=` + encodeURIComponent( prompt );
@@ -331,7 +333,7 @@ async function send() {
     <p translate="no">***
       <span translate="no" style="color: green;">[${"nins.cc"}]</span>
       <!--a translate="no" target="_blank" rel="noopener noreferrer" href="${"https://copyright.nins.cc/"}">[${"copyright.nins.cc"}]</a!-->
-      <!--a translate="no" target="_blank" rel="noopener noreferrer" href="${rdap}">RDAP</a!-->
+      <!--a translate="no" target="_blank" rel="noopener noreferrer" href="${"https://copyright.nins.cc/"}">RDAP</a!-->
     ***</p>
     `;
 
@@ -410,7 +412,7 @@ setInterval(() => {
 </script>
 
 
-<!-- QR ================================================== -->
+<!-- deQR ================================================== -->
 <script src="https://copyright.nins.cc/children/0001/jsQR.min.js"></script>
 <script>
 document.getElementById('input_qr').addEventListener('change', function(e) {
