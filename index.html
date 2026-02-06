@@ -295,11 +295,11 @@ async function send() {
     ///const rdap = `https://rdap.iana.org/domain/${encodeURIComponent( domain )}`;
     ///const rdap = `https://rdap.markmonitor.com/rdap/domain/${encodeURIComponent( domain )}`;
     ///const rdap = `https://client.rdap.org/?type=domain&follow-referral=0&object=${encodeURIComponent( host )}`;
-    const rdap = `https://rdap.org/domain/${encodeURIComponent( domain )}`;
-    console.log("RDAP:", rdap);
+    const rdap_out = `https://rdap.org/domain/${encodeURIComponent( getDomain(msg) )}`;
+    console.log("RDAP:", rdap_out);
     ///const reference = JSON.stringify( await fetchRdapJson(url) );
     ///const reference = "null";
-    const reference = await deurl({ "url": rdap });  ///20260202
+    const reference = await deurl({ "url": rdap_out });  ///20260202
     console.log("RDAP:", reference);
 
     const prompt_v1 = `lang*==="${lang}".;unsafe*==="${url}"?;unsafe*==="${msg}"?;`;
@@ -560,6 +560,7 @@ async function fetchRdapJson(url) {
     
 </body>
 </html>
+
 
 
 
