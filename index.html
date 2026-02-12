@@ -6,6 +6,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head translate="yes">
@@ -113,7 +114,7 @@
     background: #eee;
     color: black;
 " translate="no">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScJ6WXtrF1sKVNKEbpQvsm77ZAi3qr6fHKQfpdZTjttSIioPA/viewform" target="_blank" rel="noopener noreferrer" class="use main day"
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSct8PaArwmkAv10Eh5CEybu_88IoSj9V_QOLy07KiL6efu10g/viewform" target="_blank" rel="noopener noreferrer" class="use main day"
         style="
         flex: 0 0 auto;
         padding: 8px 12px;
@@ -201,10 +202,27 @@ urls.forEach(url => {
   ///btn.onclick = () => window.open(url, "_blank"); // 點擊打開新分頁
   btn.onclick = () => {
     document.getElementById('input_msg').value = url;  // 如果要換行可以用 "\n"
-    send();  ///20260212
+    send();  ///20260212🔢
   };
   container.appendChild(btn);
 });
+
+container.insertAdjacentHTML('beforeend', `
+    <button class="use main day"
+        onclick="window.open('https://safebrowsing.google.com/safebrowsing/report_phish/', '_blank', 'noopener,noreferrer')"
+        style="
+        margin-left: auto;
+        flex: 0 0 auto;
+        padding: 8px 12px;
+        border: 1px solid #000;
+        border-radius: 999px;
+        text-decoration: none;
+        cursor: pointer;
+        white-space: nowrap;
+        ">
+        🎯
+    </button>
+`);
 </script>
 
 
@@ -359,7 +377,6 @@ async function send() {
     <!--a translate="no" target="_blank" rel="noopener noreferrer" href="${translate}">[${translate}]</a!-->
     <p translate="no">👉
       <a translate="no" target="_blank" rel="noopener noreferrer" href="${openai}">ChatGPT</a> & 
-      <a translate="yes" target="_blank" rel="noopener noreferrer" href="${risk}">Submit Risk</a> & 
       <a translate="no" target="_blank" rel="noopener noreferrer" href="${google}">Gemini</a>
     👈</p>
 
@@ -367,7 +384,6 @@ async function send() {
     
     <p translate="no">👉
       <a translate="no" target="_blank" rel="noopener noreferrer" href="${openai}">ChatGPT</a> & 
-      <a translate="yes" target="_blank" rel="noopener noreferrer" href="${form}">Give Feedback</a> & 
       <a translate="no" target="_blank" rel="noopener noreferrer" href="${google}">Gemini</a>
     👈</p>
     <p translate="no">***
