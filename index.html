@@ -349,6 +349,7 @@ async function send() {
     const search = `question=${need}?\ninput=${url}.\nrdap=${refer_in}.\nnotice=${bynins}!`;
     const google = `https://www.google.com/search?udm=50&aep=1&aic=0&hl=${lang}&q=` + encodeURIComponent( prompt );
     const form = "https://docs.google.com/forms/d/e/1FAIpQLSct8PaArwmkAv10Eh5CEybu_88IoSj9V_QOLy07KiL6efu10g/viewform";
+    const risk = "https://safebrowsing.google.com/safebrowsing/report_phish/";
 
 
     ///🤖🧠🎯
@@ -358,7 +359,7 @@ async function send() {
     <!--a translate="no" target="_blank" rel="noopener noreferrer" href="${translate}">[${translate}]</a!-->
     <p translate="no">👉
       <a translate="no" target="_blank" rel="noopener noreferrer" href="${openai}">ChatGPT</a> & 
-      <a translate="yes" target="_blank" rel="noopener noreferrer" href="${form}">feedback</a> & 
+      <a translate="yes" target="_blank" rel="noopener noreferrer" href="${risk}">Submit Risk</a> & 
       <a translate="no" target="_blank" rel="noopener noreferrer" href="${google}">Gemini</a>
     👈</p>
 
@@ -366,7 +367,7 @@ async function send() {
     
     <p translate="no">👉
       <a translate="no" target="_blank" rel="noopener noreferrer" href="${openai}">ChatGPT</a> & 
-      <a translate="yes" target="_blank" rel="noopener noreferrer" href="${form}">feedback</a> & 
+      <a translate="yes" target="_blank" rel="noopener noreferrer" href="${form}">Give Feedback</a> & 
       <a translate="no" target="_blank" rel="noopener noreferrer" href="${google}">Gemini</a>
     👈</p>
     <p translate="no">***
