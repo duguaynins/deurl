@@ -201,6 +201,7 @@ urls.forEach(url => {
   ///btn.onclick = () => window.open(url, "_blank"); // 點擊打開新分頁
   btn.onclick = () => {
     document.getElementById('input_msg').value = url;  // 如果要換行可以用 "\n"
+    send();  ///20260212
   };
   container.appendChild(btn);
 });
@@ -267,6 +268,16 @@ async function deurl(params) {
 let stopFlag = null;
 let okFlag = false;
 
+
+function recheck(url) {
+    try {
+        new URL(url);  // 嘗試建立 URL 物件
+        return false
+    } catch (e) {
+        return true
+    }
+}
+
 async function send() {
     ///document.getElementById("input_qr").disabled = true;
     ///document.getElementById("input_msg").disabled = true;
@@ -277,7 +288,8 @@ async function send() {
     const url = document.getElementById("input_msg").value;
     console.log("RAW:", JSON.stringify(url));
 
-    if (!url.startsWith("http")) { 
+    if (recheck(url)) {
+    ///if (!url.startsWith("http")) { 
       document.getElementById("content").innerHTML = `
       <p translate="no" style="color: red;">[${url}]</p>
       <p>Invalid URL format!!! Refer to available formats.</p>
@@ -308,7 +320,7 @@ async function send() {
     ///https://rdap.org/domain/sobatgaming.it.com
     const domain = getDomain(msg);
     const host = getHostname(msg);
-    const translate = `https://translate.google.com/translate?sl=auto&tl=zh-TW&u=${encodeURIComponent( msg )}`
+    const translate = `https://translate.google.com/translate?sl=auto&tl=zh-TW&u=${encodeURIComponent( "https://copyright.nins.cc/" )}`;  ///msg
     ///const rdap = `https://rdap.iana.org/domain/${encodeURIComponent( domain )}`;
     ///const rdap = `https://rdap.markmonitor.com/rdap/domain/${encodeURIComponent( domain )}`;
     ///const rdap = `https://client.rdap.org/?type=domain&follow-referral=0&object=${encodeURIComponent( host )}`;
@@ -332,26 +344,30 @@ async function send() {
     const prompt = `notice=${bynins}!\n---\nlang=${lang}.\ntask=${task}.\nneed=${need}.\n---\ninput=${url}.\nrdap=${refer_in}.\n---\nhtml=${msg}.\n---\nnotice=${bynins}!`;
     const openai = `https://chatgpt.com/?prompt=` + encodeURIComponent( prompt );
     
+    const hint = "Submit URL";  ///Please click the heart emoji if you have any comments
     const test = `"${url}" the URL is safe(🟢/🔴) ?`
     const search = `question=${need}?\ninput=${url}.\nrdap=${refer_in}.\nnotice=${bynins}!`;
     const google = `https://www.google.com/search?udm=50&aep=1&aic=0&hl=${lang}&q=` + encodeURIComponent( prompt );
+    const form = "https://docs.google.com/forms/d/e/1FAIpQLSct8PaArwmkAv10Eh5CEybu_88IoSj9V_QOLy07KiL6efu10g/viewform";
 
 
     ///🤖🧠🎯
     document.getElementById("content").innerHTML = `
     <p translate="no" style="color: red;">[${url}]</p>
-    <p translate="no" style="color: red;">[${msg}]</p>
-    <!--a translate="no" target="_blank" rel="noopener noreferrer" href="${translate}">[${msg}]</a!-->
-    <p translate="yes">Decoding complete! You can click "AI" to analyze the URL!🤖🤖🤖</p>
-    <!--p translate="no">***
-      <a translate="no" target="_blank" rel="noopener noreferrer" href="${openai}">ChatGPT</a>
-       & 
-      <a translate="no" target="_blank" rel="noopener noreferrer" href="${google}">Gemini</a>    
-    ***</p!-->
+    <!--p translate="no" style="color: red;">[${msg}]</p!-->
+    <!--a translate="no" target="_blank" rel="noopener noreferrer" href="${translate}">[${translate}]</a!-->
     <p translate="no">👉
-      <a translate="no" target="_blank" rel="noopener noreferrer" href="${openai}">ChatGPT</a>
-       & 
-      <a translate="no" target="_blank" rel="noopener noreferrer" href="${google}">Gemini</a>   
+      <a translate="no" target="_blank" rel="noopener noreferrer" href="${openai}">ChatGPT</a> & 
+      <a translate="yes" target="_blank" rel="noopener noreferrer" href="${form}">feedback</a> & 
+      <a translate="no" target="_blank" rel="noopener noreferrer" href="${google}">Gemini</a>
+    👈</p>
+
+    <p translate="yes">Decoding complete! You can click "AI" to analyze the URL!🤖🤖🤖</p>
+    
+    <p translate="no">👉
+      <a translate="no" target="_blank" rel="noopener noreferrer" href="${openai}">ChatGPT</a> & 
+      <a translate="yes" target="_blank" rel="noopener noreferrer" href="${form}">feedback</a> & 
+      <a translate="no" target="_blank" rel="noopener noreferrer" href="${google}">Gemini</a>
     👈</p>
     <p translate="no">***
       <span translate="no" style="color: green;">[${"nins.cc"}]</span>
