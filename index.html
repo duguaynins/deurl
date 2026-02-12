@@ -333,7 +333,8 @@ async function send() {
     ///const prompt = `notice=${bynins}!\n---\nlang=${lang}.\ntask=${task}.\nneed=${need}.\n---\ninput=${url}.\noutput=${msg}.\n---\nnotice=${bynins}!\n---\nrdap=${reference}.\n---\nnotice=${bynins}!`;
     const prompt = `notice=${bynins}!\n---\nlang=${lang}.\ntask=${task}.\nneed=${need}.\n---\ninput=${url}.\nrdap=${refer_in}.\n---\noutput=${msg}.\nrdap=${refer_out}.\n---\nnotice=${bynins}!`;
     const openai = `https://chatgpt.com/?prompt=` + encodeURIComponent( prompt );
-    const google = `https://www.google.com/search?udm=50&aep=1&aic=0&hl=${lang}&q=` + encodeURIComponent( prompt );
+    const google = `https://www.google.com/search?udm=50&aep=1&aic=0&hl=${lang}&q=` + encodeURIComponent( `"${url}" is safe?` );
+    ///const google = `https://www.google.com/search?udm=50&aep=1&aic=0&hl=${lang}&q=` + encodeURIComponent( prompt );
 
 
     ///🤖🧠🎯
@@ -348,6 +349,8 @@ async function send() {
       <a translate="no" target="_blank" rel="noopener noreferrer" href="${google}">Gemini</a>    
     ***</p!-->
     <p translate="no">👉
+      <a translate="no" target="_blank" rel="noopener noreferrer" href="${google}">Gemini</a>  
+       &   
       <a translate="no" target="_blank" rel="noopener noreferrer" href="${openai}">ChatGPT</a>
     👈</p>
     <p translate="no">***
@@ -582,6 +585,7 @@ async function fetchRdapJson(url) {
     
 </body>
 </html>
+
 
 
 
