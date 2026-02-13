@@ -331,8 +331,8 @@ async function send() {
     const need = `URL is safe(🟢/🔴) ? Shows the recommended degrees of caution "(🟢/🔴)" when operating under zero-trust. Who provided the prompt. Check the domain owner and review the website content`;
     
     ///const url...
-    const raw = await deurl({ "url": url });
-    const msg = Array.isArray(raw) ? raw[0] : raw;
+    const msg = await deurl({ "url": url });
+    ///const msg = Array.isArray(raw) ? raw[0] : raw;
   
     console.log("URL:", url);
 
@@ -620,6 +620,7 @@ async function fetchRdapJson(url) {
     
 </body>
 </html>
+
 
 
 
