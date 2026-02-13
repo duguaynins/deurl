@@ -7,6 +7,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head translate="yes">
@@ -333,6 +334,9 @@ async function send() {
     ///const url...
     const msg = await deurl({ "url": url });
     ///const msg = Array.isArray(raw) ? raw[0] : raw;
+
+    ///const raw = await deurl({ "url": url });
+    ///const msg = JSON.stringify( raw );
   
     console.log("URL:", url);
 
@@ -357,19 +361,22 @@ async function send() {
     console.log("RDAP:", refer_out);  */
 
     const bynins = `This is the result of a URL redirect analysis. The analysis technology prompt is provided by "nins.cc"`;
+    const form = "https://docs.google.com/forms/d/e/1FAIpQLSct8PaArwmkAv10Eh5CEybu_88IoSj9V_QOLy07KiL6efu10g/viewform";
+    const risk = "https://safebrowsing.google.com/safebrowsing/report_phish/";
+    const hint = "Users are advised to avoid using any unknown links";  ///Avoid using any unknown links
+    ///const hint = "Submit URL";  ///Please click the heart emoji if you have any comments
 
     ///const prompt = `${bynins}!\n---\nlang=${lang}.\n${task}.\n${need}.\n---\n${url}.\n${msg}.\n---\n${bynins}!\n---\n${reference}.\n---\n${bynins}!`;
     ///const prompt = `notice=${bynins}!\n---\nlang=${lang}.\ntask=${task}.\nneed=${need}.\n---\ninput=${url}.\noutput=${msg}.\n---\nnotice=${bynins}!\n---\nrdap=${reference}.\n---\nnotice=${bynins}!`;
     ///const prompt = `notice=${bynins}!\n---\nlang=${lang}.\ntask=${task}.\nneed=${need}.\n---\ninput=${url}.\nrdap=${refer_in}.\n---\noutput=${msg}.\nrdap=${refer_out}.\n---\nnotice=${bynins}!`;
-    const prompt = `notice=${bynins}!\n---\nlang=${lang}.\ntask=${task}.\nneed=${need}.\n---\ninput=${url}.\nrdap=${refer_in}.\n---\nhtml=${msg}.\n---\nnotice=${bynins}!`;
+    ///const prompt = `notice=${bynins}!\n---\nlang=${lang}.\ntask=${task}.\nneed=${need}.\n---\ninput=${url}.\nrdap=${refer_in}.\n---\nhtml=${msg}.\n---\nnotice=${bynins}!`;
+    ///const prompt = `notice=${bynins}!\n---\nlang=${lang}.\ntask=${task}.\nneed=${need}.\n---\ninput=${url}.\nrdap=${refer_in}.\n---\nhtml=${msg}.\n---sumbit=${risk}.\nalarm=${hint}.\n---\nnotice=${bynins}!`;  ///vt
+    const prompt = `notice=${bynins}!\n---\nlang=${lang}.\ntask=${task}.\nneed=${need}.\nsumbit=${risk}.\nalarm=${hint}.\n---\ninput=${url}.\nrdap=${refer_in}.\n---\nhtml=${msg}.\n---\nnotice=${bynins}!`;  ///vt
     const openai = `https://chatgpt.com/?prompt=` + encodeURIComponent( prompt );
     
-    const hint = "Submit URL";  ///Please click the heart emoji if you have any comments
     const test = `"${url}" the URL is safe(🟢/🔴) ?`
     const search = `question=${need}?\ninput=${url}.\nrdap=${refer_in}.\nnotice=${bynins}!`;
     const google = `https://www.google.com/search?udm=50&aep=1&aic=0&hl=${lang}&q=` + encodeURIComponent( prompt );
-    const form = "https://docs.google.com/forms/d/e/1FAIpQLSct8PaArwmkAv10Eh5CEybu_88IoSj9V_QOLy07KiL6efu10g/viewform";
-    const risk = "https://safebrowsing.google.com/safebrowsing/report_phish/";
 
 
     ///🤖🧠🎯
