@@ -8,6 +8,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head translate="yes">
@@ -97,9 +98,12 @@
 <canvas id="canvas_qr" style="display:none;"></canvas>
 
 <div id="content" style="background: #CCCCCC; overflow:auto; width:100%; flex:1; border: 1px solid #ccc; color: black;">
-<p style="color: gray;">or select a QR image.🖼️🖼️🖼️</p>
+<!--p style="color: gray;">or select a QR image.🖼️🖼️🖼️</p>
 <p>The final HTTPS destination after decoding will be displayed here.</p>
-<p style="color: green;">Please enter the URL and send it.🚀🚀🚀</p>
+<p style="color: green;">Please enter the URL and send it.🚀🚀🚀</p!-->
+<p style="color: gray;">1. Enter a URL or upload a barcode.</p>
+<p>Get security analysis in just two steps.</p>
+<p style="color: gray;">2. Choose your preferred AI to view the report.</p>
 </div>
 
 <div id="url-slider" style="
@@ -303,6 +307,7 @@ async function send() {
     ///stopFlag = true;
     document.getElementById("input_msg").value =  document.getElementById("input_msg").value.trim();
     document.getElementById("content").innerHTML = "Waiting for decoding...";
+    document.getElementById("content").innerHTML = "Google will provide the analysis report soon.";
 
     const url = document.getElementById("input_msg").value;
     console.log("RAW:", JSON.stringify(url));
@@ -381,25 +386,24 @@ async function send() {
 
     ///🤖🧠🎯
     document.getElementById("content").innerHTML = `
-    <p translate="no" style="color: red;">[${url}]</p>
+    <!--p translate="no" style="color: red;">[${url}]</p!-->
     <!--p translate="no" style="color: red;">[${msg}]</p!-->
     <!--a translate="no" target="_blank" rel="noopener noreferrer" href="${translate}">[${translate}]</a!-->
+    <br>
     <p translate="no">👉
-      <a translate="no" target="_blank" rel="noopener noreferrer" href="${openai}">ChatGPT</a> & 
+      <a translate="no" target="_blank" rel="noopener noreferrer" href="${openai}">ChatGPT</a> 1️⃣ & 2️⃣ 
       <a translate="no" target="_blank" rel="noopener noreferrer" href="${google}">Gemini</a>
     👈</p>
-
-    <p translate="yes">Decoding complete! You can click "AI" to analyze the URL!🤖🤖🤖</p>
-    
+    <!--p translate="no" style="color: red;">[${url}]</p!-->
+    <p translate="yes" style="color: black;">The reference report will be displayed in a few seconds.</p>
     <p translate="no">👉
-      <a translate="no" target="_blank" rel="noopener noreferrer" href="${openai}">ChatGPT</a> & 
+      <a translate="no" target="_blank" rel="noopener noreferrer" href="${openai}">ChatGPT</a> 1️⃣ & 2️⃣ 
       <a translate="no" target="_blank" rel="noopener noreferrer" href="${google}">Gemini</a>
     👈</p>
-    <p translate="no">***
+    <br>
+    <!--p translate="no">***
       <span translate="no" style="color: green;">[${"nins.cc"}]</span>
-      <!--a translate="no" target="_blank" rel="noopener noreferrer" href="${"https://copyright.nins.cc/"}">[${"copyright.nins.cc"}]</a!-->
-      <!--a translate="no" target="_blank" rel="noopener noreferrer" href="${"https://copyright.nins.cc/"}">RDAP</a!-->
-    ***</p>
+    ***</p!-->
     `;
 
     /*
@@ -415,6 +419,13 @@ async function send() {
 
     stopFlag = false;
     okFlag = true;
+
+    setTimeout(function() {
+        ///window.location.href = google;
+        window.open(google, "_blank", "noopener,noreferrer");
+        ///Decoding complete! You can click "AI" to analyze the URL!🤖🤖🤖
+        ///The final HTTPS destination after decoding will be displayed here.
+    }, 2000);
 }
 
 
