@@ -637,38 +637,15 @@ async function fetchRdapJson(url) {
 
 <script>
   function UserReady() {
-    window.addEventListener('load', () => {  
-      
-      // 建立 style 標籤
-      const style = document.createElement('style');
-      style.textContent = `
-        *, *::before, *::after {
-          text-align: center; /* left / center / right / justify */
-          flex-shrink: 0;      /* 不縮小子元素高度 */
-        }
-        #chatbox > * {
-          flex-shrink: 0;      /* 不縮小子元素高度 */
-        }
-        #chatbox * {
-          text-align: left;   /* 所有子層文字置中 */
-        }
-        dialog * {
-          text-align: left;   /* 所有子層文字置中 */
-        }
-        #DialogTrans * {
-          text-align: center;   /* 所有子層文字置中 */
-        }
-      `;
-      document.head.appendChild(style);
-    });
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById("input_msg").value = params.get("data");
   }
   ///20260216
-  document.getElementById("InputRoom").style.display = "block";
   document.addEventListener('click', function handler(event) {
     if (event.target.tagName === 'BUTTON') {
       console.log('START:', event.target);
       // 這裡放你的邏輯
-      ///UserReady();
+      UserReady();
       // 這裡放你的邏輯
     }
   }, { once: true });
@@ -676,6 +653,7 @@ async function fetchRdapJson(url) {
     
 </body>
 </html>
+
 
 
 
