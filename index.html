@@ -639,6 +639,7 @@ async function fetchRdapJson(url) {
   function UserReady() {
     const params = new URLSearchParams(window.location.search);
     document.getElementById("input_msg").value = params.get("data");
+    setTimeout(function () { send() }, 2200);
   }
   ///20260216
   document.addEventListener('click', function handler(event) {
@@ -653,6 +654,7 @@ async function fetchRdapJson(url) {
     
 </body>
 </html>
+
 
 
 
