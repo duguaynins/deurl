@@ -278,7 +278,7 @@ async function deurl(params) {
   const inputs = { "inputs": url };
   const outputs = await HuggingFaceAPI({
     group: "duguaynins",
-    space: "RedirectAPI",
+    space: "Server",
     path: "decode/url",  ///embeddings/meta
     payload: inputs,
   }); 
@@ -421,7 +421,8 @@ async function send() {
     okFlag = true;
 
     setTimeout(function() {
-        window.location.href = google;
+        ///window.location.href = google;  ///20260411_2138
+
         ///window.open(google, "_blank", "noopener,noreferrer");
         ///Decoding complete! You can click "AI" to analyze the URL!🤖🤖🤖
         ///The final HTTPS destination after decoding will be displayed here.
