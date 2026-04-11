@@ -343,7 +343,8 @@ async function send() {
     ///const raw = await deurl({ "url": url });
     ///const msg = JSON.stringify( raw );
   
-    console.log("URL:", url);
+    console.log("HTML:", url);
+    console.log("HTML:", msg);
 
     ///https://rdap.iana.org/domain/example.com
     ///https://rdap.org/domain/sobatgaming.it.com
@@ -376,7 +377,7 @@ async function send() {
     ///const prompt = `notice=${bynins}!\n---\nlang=${lang}.\ntask=${task}.\nneed=${need}.\n---\ninput=${url}.\nrdap=${refer_in}.\n---\noutput=${msg}.\nrdap=${refer_out}.\n---\nnotice=${bynins}!`;
     ///const prompt = `notice=${bynins}!\n---\nlang=${lang}.\ntask=${task}.\nneed=${need}.\n---\ninput=${url}.\nrdap=${refer_in}.\n---\nhtml=${msg}.\n---\nnotice=${bynins}!`;
     ///const prompt = `notice=${bynins}!\n---\nlang=${lang}.\ntask=${task}.\nneed=${need}.\n---\ninput=${url}.\nrdap=${refer_in}.\n---\nhtml=${msg}.\n---sumbit=${risk}.\nalarm=${hint}.\n---\nnotice=${bynins}!`;  ///vt
-    const prompt = `notice=${bynins}!\n---\nlang=${lang}.\ntask=${task}.\nneed=${need}.\nsumbit=${risk}.\nalarm=${hint}.\n---\ninput=${url}.\n---\nrdap=${refer_in}.\n---\nhtml=${msg}.\n---\nnotice=${bynins}!`;  ///vt
+    const prompt = `notice=${bynins}!\n---\nlang=${lang}.\ntask=${task}.\nneed=${need}.\nsumbit=${risk}.\nalarm=${hint}.\n---\ninput=${url}.\n---\nrdap=${JSON.stringify(refer_in)}.\n---\nhtml=${JSON.stringify(msg)}.\n---\nnotice=${bynins}!`;  ///vt
     const openai = `https://chatgpt.com/?prompt=` + encodeURIComponent( prompt );
     
     const test = `"${url}" the URL is safe(🟢/🔴) ?`
