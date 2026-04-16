@@ -103,9 +103,9 @@
 <!--p style="color: gray;">or select a QR image.🖼️🖼️🖼️</p>
 <p>The final HTTPS destination after decoding will be displayed here.</p>
 <p style="color: green;">Please enter the URL and send it.🚀🚀🚀</p!-->
-<p style="color: gray;">1. Enter a URL or upload a barcode.</p>
+<p style="color: gray;" translate="no">🖼️<b translate="yes">1. Enter a URL or upload a barcode.</b>🚀</p>
 <p>Get security analysis in just two steps.</p>
-<p style="color: gray;">2. Choose your preferred AI to view the report.</p>
+<p style="color: gray;" translate="no">🤖<b translate="yes">2. Choose your preferred AI to view the report.</b>👌</p>
 </div>
 
 <div id="url-slider" style="
@@ -497,6 +497,15 @@ setInterval(() => {
 <script src="https://unpkg.com/html5-qrcode"></script>
 
 <script>
+function setStatus(text) { statusText.textContent = `STATUS: ${text}`; }
+function terminalPrint(html) { content.innerHTML = html; }
+
+/*
+terminalPrint(`>
+    <span class="line">[ F1 ] UPLOAD QR / BARCODE IMAGE.</span>
+    <span class="line">[ F2 ] MANUALLY ENTER URL BELOW.</span>
+    <span class="line">[ F3 ] GENERATE AI SECURITY REPORT.</span>
+`);*/
 
 document.getElementById('input_qr').addEventListener('change', function(e) {
     const file = e.target.files[0];
