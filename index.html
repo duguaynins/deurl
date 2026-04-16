@@ -9,6 +9,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head translate="yes">
@@ -94,7 +95,8 @@
           
 <!-- 放置你原有的布局 -->
 <button type="button" class="main use fat" onclick="document.getElementById('input_qr').click();">🖼️<p translate="no" style="margin: 0; padding: 0; font-size: 1vh;" class="label">image</p></button>
-<input type="file" id="input_qr" style="display: none;" accept="image/*">
+<!--input type="file" id="input_qr" style="display: none;" accept="image/*"!-->
+<input type="file" id="input_qr" style="display: none;" accept="image/*" capture="environment">
 <canvas id="canvas_qr" style="display:none;"></canvas>
 
 <div id="content" style="background: #CCCCCC; overflow:auto; width:100%; flex:1; border: 1px solid #ccc; color: black;">
@@ -492,7 +494,32 @@ setInterval(() => {
 
 <!-- deQR ================================================== -->
 <script src="https://copyright.nins.cc/children/0001/jsQR.min.js"></script>
+<script src="https://unpkg.com/html5-qrcode"></script>
+
 <script>
+
+document.getElementById('input_qr').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    document.getElementById('content').innerHTML = "正在深度解析圖片...";
+
+    const html5QrCode = new Html5Qrcode("canvas_qr"); // 雖然叫 canvas_qr 但它能處理檔案
+
+    html5QrCode.scanFile(file, true)
+        .then(decodedText => {
+            console.log("解析成功:", decodedText);
+            document.getElementById('content').innerHTML = "Scan complete. QR code found!";
+            document.getElementById('input_msg').value = decodedText;
+            send(); // 觸發您原本的解碼邏輯
+        })
+        .catch(err => {
+            console.error("解析失敗:", err);
+            document.getElementById('content').innerHTML = "Try again.";///"Please increase the clarity and submit only the barcode.";
+            document.getElementById('input_msg').value = "***";
+        });
+});
+/*
 document.getElementById('input_qr').addEventListener('change', function(e) {
   
     const canvas = document.getElementById('canvas_qr');
@@ -537,7 +564,7 @@ document.getElementById('input_qr').addEventListener('change', function(e) {
         img.src = event.target.result;
     };
     reader.readAsDataURL(file);
-});
+});*/
 </script>
 
 <!-- URL ================================================== -->
