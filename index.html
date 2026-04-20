@@ -1,15 +1,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head translate="yes">
@@ -309,7 +300,7 @@ async function send() {
     ///stopFlag = true;
     document.getElementById("input_msg").value =  document.getElementById("input_msg").value.trim();
     document.getElementById("content").innerHTML = "Waiting for decoding...";
-    document.getElementById("content").innerHTML = "Google will provide the analysis report soon.";
+    document.getElementById("content").innerHTML = "Select whose report soon...";  ///Google will provide the analysis report soon.
 
     const url = document.getElementById("input_msg").value;
     console.log("RAW:", JSON.stringify(url));
@@ -385,6 +376,7 @@ async function send() {
     const test = `"${url}" the URL is safe(🟢/🔴) ?`
     const search = `question=${need}?\ninput=${url}.\nrdap=${refer_in}.\nnotice=${bynins}!`;
     const google = `https://www.google.com/search?udm=50&aep=1&aic=0&hl=${lang}&q=` + encodeURIComponent( prompt );
+    const perple = `https://www.perplexity.ai/?q=` + encodeURIComponent(prompt);   ///xmsg or prompt
 
 
     ///🤖🧠🎯
@@ -407,6 +399,64 @@ async function send() {
     <!--p translate="no">***
       <span translate="no" style="color: green;">[${"nins.cc"}]</span>
     ***</p!-->
+    `;
+    document.getElementById("content").innerHTML = `
+      <a translate="no" target="_blank" rel="noopener noreferrer" href="${openai}">ChatGPT</a><br>
+      <a translate="no" target="_blank" rel="noopener noreferrer" href="${google}">Gemini</a><br>
+      <a translate="no" target="_blank" rel="noopener noreferrer" href="${perple}">Perplexity</a><br>
+    `;
+    document.getElementById("content").innerHTML = `
+      <div style="display:flex; flex-direction:column; gap:12px; max-width:260px;">
+
+        <a translate="no" target="_blank" rel="noopener noreferrer"
+          href="${openai}"
+          style="
+            display:block;
+            padding:12px 16px;
+            background:#000;
+            color:#fff;
+            text-decoration:none;
+            border-radius:10px;
+            font-weight:600;
+            text-align:center;
+            box-shadow:0 4px 10px rgba(0,0,0,0.15);
+          ">
+          ChatGPT
+        </a>
+
+        <a translate="no" target="_blank" rel="noopener noreferrer"
+          href="${google}"
+          style="
+            display:block;
+            padding:12px 16px;
+            background:#1a73e8;
+            color:#fff;
+            text-decoration:none;
+            border-radius:10px;
+            font-weight:600;
+            text-align:center;
+            box-shadow:0 4px 10px rgba(0,0,0,0.15);
+          ">
+          Gemini
+        </a>
+
+        <a translate="no" target="_blank" rel="noopener noreferrer"
+          href="${perple}"
+          style="
+            display:block;
+            padding:12px 16px;
+            background:#6c5ce7;
+            color:#fff;
+            text-decoration:none;
+            border-radius:10px;
+            font-weight:600;
+            text-align:center;
+            box-shadow:0 4px 10px rgba(0,0,0,0.15);
+          ">
+          Perplexity
+        </a>
+
+      </div>
     `;
 
     /*
@@ -693,27 +743,6 @@ async function fetchRdapJson(url) {
     
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
